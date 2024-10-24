@@ -93,7 +93,7 @@ with DAG(
         openStartDt = "{{ ds_nodash[:4] }}"
         openEndDt = "{{ ds_nodash[:4] }}"
 
-        file_path = f"/home/ubuntu/data/year_movie/{openStartDt}.csv"
+        file_path = f"/home/kimpass189/data/year_movie/{openStartDt}.csv"
         os.makedirs(os.path.dirname(file_path), exist_ok = True)
 
         data = requestData(openStartDt, openEndDt)
