@@ -1,0 +1,23 @@
+[project]
+name = "movis"
+version = "0.1.0"
+description = "Default template for PDM package"
+authors = [
+    {name = "Kimwonjoon", email = "kimpass189@gmail.com"},
+]
+dependencies = [
+    "pandas>=2.2.3",
+    "pyarrow>=17.0.0",
+    "requests>=2.32.3",
+]
+requires-python = ">=3.11"
+readme = "README.md"
+license = {text = "MIT"}
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
+
+[tool.pdm]
+distribution = true
