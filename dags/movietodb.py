@@ -112,11 +112,9 @@ with DAG(
     task_start = EmptyOperator(task_id='start')
     task_end = EmptyOperator(task_id='end', trigger_rule="all_done")
     # 수정 필요
-    jsondf = PythonVirtualenvOperator(
+    jsondf = PythonOperator(
             task_id='json.df',
             python_callable=jsontodf,
-            requirements=["https://github.com/DE32-4-team5/mov_air.git@main"],
-            system_site_packages=False,
     )
 
     task_start >> jsondf >> task_end
