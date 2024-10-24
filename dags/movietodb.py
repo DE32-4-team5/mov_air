@@ -14,7 +14,7 @@ from airflow.operators.python import (
 #import os
 
 with DAG(
-	'Transfer_Location',
+	'Movie-to-CSV',
 	default_args={
 		'depends_on_past': False,
 		'retries': 0,
@@ -24,11 +24,11 @@ with DAG(
 
 		max_active_runs=1,
 		max_active_tasks=3,
-		description='Transform moviedata to address using API',
+		description='Movie Data to CSV',
 		schedule_interval="@yearly",
 		start_date=datetime(2016, 1, 1),
 		catchup=True,
-		tags=['API','movie','transform'],
+		tags=['movie','csv'],
 ) as dag:
 
 #Pair Programming
