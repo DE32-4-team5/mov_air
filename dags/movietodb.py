@@ -8,9 +8,10 @@ from airflow.operators.python import (
         PythonVirtualenvOperator,
         BranchPythonOperator,
 )
-import pandas as pd
-import requests
-import os
+#from tqdm import tqdm
+#import pandas as pd
+#import requests
+#import os
 
 with DAG(
 	'Transfer_Location',
@@ -57,6 +58,9 @@ with DAG(
 
     # key
     # url = http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json?=
+        from tqdm import tqdm
+        import json
+        import requests
         key = "c724c27ff6d4e73af853bd2afefb0401"
 
         url = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json"
@@ -73,7 +77,7 @@ with DAG(
         if response.status_code == 200:
             result = response.json()
             pg = (result["movieListResult"]["totCnt"] // 10) + 1
-            for i in range(1,pg+1):
+            for i in tqdm(range(1,pg+1)):
                 params["curPage"] = i
                 res = requests.get(url, params=params)
                 result_pg = res.json()
@@ -84,6 +88,8 @@ with DAG(
             print("Request Failed : ", response.status.code)
             return False
     def jsontodf(): # json파일 데이터프레임으로 변경
+        import pandas as pd
+        import os
         openStartDt = "{{ ds_nodash[:4] }}"
         openEndDt = "{{ ds_nodash[:4] }}"
 
